@@ -2,7 +2,7 @@ import { Form, FormField } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod"
 import TextareaAutosize from 'react-textarea-autosize'
-import { use, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
 import { Button } from "@/components/ui/button";
@@ -44,8 +44,11 @@ export const MessageForm = ({ projectId }: Props) => {
         }
     }));
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log(values)
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        await createMessage.mutateAsync({
+            value: values.value,
+            projectId,
+        })
     }
 
     const [isFocused, setIsFocused] = useState(false);
