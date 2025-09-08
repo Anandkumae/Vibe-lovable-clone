@@ -17,7 +17,7 @@ export const ProjectView = ({
     projectId
 }: Props) => {
     const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
-    
+
 
 
     return (
@@ -28,6 +28,10 @@ export const ProjectView = ({
                     minSize={20}
                     className="flex flex-col min-h-0"
                 >
+
+                    <Suspense>
+                        <ProjectHeader projectId={projectId}/>
+                    </Suspense>
                     <Suspense fallback={<div>Loading...</div>}>
                         <MessageContainer  
                             projectId={projectId}
