@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import { UserControl } from "@/components/user-control"
 import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs"
 import Image from "next/image"
 import Link from "next/link"
@@ -32,7 +33,7 @@ export const Navbar = () => {
                     </SignInButton> 
                 </SignedOut>
                 <SignedIn>
-                    <p>TODO: </p>
+                    <UserControl showName/>
                 </SignedIn>
 
             </div> 
