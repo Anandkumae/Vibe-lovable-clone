@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button"
 import { UserControl } from "@/components/user-control"
 import { useScroll } from "@/hooks/use-scroll"
@@ -17,9 +19,9 @@ export const Navbar = () => {
                 isScrolled && "bg-background border-border"
             )}
         >
-            <div>
+            <div className="flex justify-between ">
                 <Link href={"/"} className="flex items-center gap-2">
-                    <Image src="/logo.svg" alt="vibe" />
+                    <Image src="/logo.svg" alt="vibe" width={18} height={18}/>
                     <span className="font-semibold text-lg">Vibe</span>
                 </Link>
                 <SignedOut>

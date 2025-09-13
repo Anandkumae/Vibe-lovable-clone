@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { useTRPC } from "@/trpc/client"
+import { useTRPC } from "@/trpc/client";
+
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query"
 import { formatDistanceToNow } from "date-fns";
