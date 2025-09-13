@@ -9,6 +9,7 @@ import { Fragment } from "@/generated/prisma";
 import { FragmentWeb } from "@/modules/projects/ui/components/fragment-web";
 import { MessageContainer } from "@/modules/projects/ui/components/messages-container";
 import { ProjectHeader } from "@/modules/projects/ui/components/project-header";
+import { useAuth } from "@clerk/nextjs";
 import { CodeIcon, CrownIcon, EyeIcon } from "lucide-react";
 import Link from "next/link";
 import { Suspense, useState } from "react";
@@ -23,6 +24,9 @@ interface Props {
 export const ProjectView = ({ 
     projectId
 }: Props) => {
+    const { has } = useAuth();
+    const hasProAccess = has?.({ plan: "pro"});
+
     const [activeFragment, setActiveFragment] = useState<Fragment | null>(null);
     const [tabState, setTabState] = useState<"preview" | "code">("preview");
 
@@ -63,16 +67,18 @@ export const ProjectView = ({
                                     <TabsTrigger value="preview" className="rounded-md">
                                         <EyeIcon /> <span>Demo</span>
                                     </TabsTrigger>
-                                    <TabsTrigger value="code" className="rounded-md">
+                                    <TabsTrigger value="code"  className="rounded-md">
                                         <CodeIcon /> <span>Code</span>
                                     </TabsTrigger>
                                 </TabsList>
                                 <div className="ml-auto flex items-center gap-x-2">
-                                    <Button asChild size="sm" variant="tertiary">
-                                        <Link href="/pricing">
-                                        <CrownIcon /> Upgrade
-                                        </Link>
+                                    {!hasProAccess && (
+                                        <Button asChild size="sm" variant="tertiary">
+                                            <Link href="/pricing">
+                                            <CrownIcon /> Upgrade
+                                            </Link>
                                     </Button>
+                                    )}
                                     <UserControl />
                                 </div>
                             </div>
