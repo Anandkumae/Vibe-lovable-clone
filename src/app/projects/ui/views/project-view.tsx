@@ -13,6 +13,7 @@ import { useAuth } from "@clerk/nextjs";
 import { CodeIcon, CrownIcon, EyeIcon } from "lucide-react";
 import Link from "next/link";
 import { Suspense, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 
 
 interface Props {
@@ -32,24 +33,27 @@ export const ProjectView = ({
 
 
     return (
-        <div>
+        <div className="h-screen">
             <ResizablePanelGroup direction="horizontal" >
                 <ResizablePanel 
                     defaultSize={35}
                     minSize={20}
                     className="flex flex-col min-h-0"
                 >
-
-                    <Suspense>
-                        <ProjectHeader projectId={projectId}/>
+                    <ErrorBoundary fallback={<p>Project header error</p>}>
+                        <Suspense fallback={<p>Loading project...</p>}>
+                            <ProjectHeader projectId={projectId}/>
+                        </Suspense>
+                    </ErrorBoundary>
+                    <ErrorBoundary fallback={<p>Messages container error</p>} >
+                        <Suspense fallback={<div>Loading messages...</div>}>
+                            <MessageContainer  
+                                projectId={projectId}
+                                activeFragment={activeFragment}
+                                setActiveFragment={setActiveFragment}
+                            />
                     </Suspense>
-                    <Suspense fallback={<div>Loading...</div>}>
-                        <MessageContainer  
-                            projectId={projectId}
-                            activeFragment={activeFragment}
-                            setActiveFragment={setActiveFragment}
-                        />
-                    </Suspense>
+                    </ErrorBoundary>
                 </ResizablePanel>
                 <ResizableHandle className="hover:bg-primary transition-colors"/>
                     <ResizablePanel 

@@ -9,7 +9,7 @@ export const messagesRouter = createTRPCRouter({
     getMany: protectedProcedure
         .input(
             z.object({
-                value: z.string().min(1, { message: "Project is requiered"})
+                projectId: z.string().min(1, { message: "Project is requiered" }),
             }),
         )
         .query(async ({ input, ctx  }) => {

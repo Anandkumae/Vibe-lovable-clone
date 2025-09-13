@@ -6,8 +6,6 @@ import { useEffect, useRef } from "react";
 import { Fragment } from "@/generated/prisma";
 import { MessageLoading } from "./message-loading";
 
-
-
 interface Props {
     projectId: string;
     activeFragment: Fragment | null;
@@ -26,7 +24,7 @@ export const MessageContainer = ({
     const { data: messages } = useSuspenseQuery(trpc.messages.getMany.queryOptions({
         projectId: projectId,
     },{
-        refetchInterval: 5000,
+        refetchInterval: 2000,
     }));
 
     useEffect(()=> {
