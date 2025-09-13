@@ -14,6 +14,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { PROJECT_TEMPLATES } from "../../constants";
+import { useClerk } from "@clerk/nextjs"
 
 
 
@@ -25,6 +26,7 @@ const formSchema = z.object({
 
 export const ProjectForm = () => {
     const trpc = useTRPC();
+    const cleark = useClerk();
     const router = useRouter();
     const queryClient = useQueryClient();
     const form = useForm<z.infer<typeof formSchema>>({
@@ -44,6 +46,10 @@ export const ProjectForm = () => {
         },
         onError: (error) => {
             toast.error(error.message);
+
+            if (error.data?.code === "UNAUTHORIZED"){
+                cleark.openSignIn();
+            }
         }
     }));
 

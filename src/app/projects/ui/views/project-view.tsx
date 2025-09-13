@@ -4,6 +4,7 @@ import { FileExplorer } from "@/components/file-explorer";
 import { Button } from "@/components/ui/button";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { UserControl } from "@/components/user-control";
 import { Fragment } from "@/generated/prisma";
 import { FragmentWeb } from "@/modules/projects/ui/components/fragment-web";
 import { MessageContainer } from "@/modules/projects/ui/components/messages-container";
@@ -72,6 +73,7 @@ export const ProjectView = ({
                                         <CrownIcon /> Upgrade
                                         </Link>
                                     </Button>
+                                    <UserControl />
                                 </div>
                             </div>
                             <TabsContent value="preview">
