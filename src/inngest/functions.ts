@@ -2,7 +2,7 @@ import { openai, createAgent, createTool, createNetwork, type Tool,  type Messag
 import { Sandbox } from "@e2b/code-interpreter";
 import { inngest } from "./client";
 import { getSandbox, lastAssistantTextMessageContent, parseAgentOutput } from "./utils";
-import z from "zod";
+import { z } from "zod";
 import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from "@/prompt";
 import prisma from "@/lib/prisma";
 import { SANDBOX_TIMEOUT } from "./types";
@@ -75,7 +75,6 @@ export const codeAgentFunction = inngest.createFunction(
           handler: async ({ command }, { step }) => {
             return await step?.run("terminal", async () => {
               const buffers = { stdout: "", stderr: "" };
-
               try {
                 const sandbox = await getSandbox(sandboxId);
                 const result = await sandbox.commands.run(command, {

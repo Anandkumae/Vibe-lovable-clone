@@ -1,3 +1,5 @@
+"use client";
+
 import { useCurrentTheme } from "@/hooks/use-current-theme";
 import { SignIn } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
@@ -24,4 +26,4 @@ const Page = () => {
     )
 }
 
-export default Page;
+export default Page;   
