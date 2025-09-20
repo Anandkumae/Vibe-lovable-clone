@@ -18,8 +18,8 @@ import { ErrorBoundary } from "react-error-boundary";
 
 interface Props {
     projectId: string;
-    activeFragment: Fragment | null;
-    setActiveFragment: (fragment: Fragment | null) => void;
+    activeFragment?: Fragment | null;
+    setActiveFragment?: (fragment: Fragment | null) => void;
 };
 
 export const ProjectView = ({ 
